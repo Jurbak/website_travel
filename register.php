@@ -11,25 +11,33 @@ require 'koneksi.php';
   <title>Travel | Daftar </title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="admin_page/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="admin_page/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="admin_page/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="admin_page/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="index2.html" class="h1"><b>Travel</b></a>
+      <a href="#" class="h1"><b>Travel</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="tambah.php" method="post">
+      <form action="reg_val.php" method="post">
+        <?php if (isset($_GET['error'])) { ?>
+        <p class="error"><?php echo $_GET['error']; ?></p>
+      <?php } ?>
+
+      <?php if (isset($_GET['success'])) { ?>
+               <p class="success"><?php echo $_GET['success']; ?></p>
+          <?php } ?>
         <div class="input-group mb-3">
+
           <input type="text" class="form-control" placeholder="Nama Lengkap" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -54,7 +62,7 @@ require 'koneksi.php';
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Tulis ulang password">
+          <input type="password" class="form-control" placeholder="Tulis ulang password" name="re_password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -87,26 +95,10 @@ require 'koneksi.php';
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="admin_page/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin_page/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="admin_page/dist/js/adminlte.min.js"></script>
 </body>
 </html>
-<?php
-if(isset($_POST['no_telp'])){
-  $username = $_POST['username'];
-  $no_telp = $_POST['no_telp'];
-  $password = $_POST['password'];
-}
-
-$query_sql = "INSERT INTO tbl_user (username, no_telp, password)
-  VALUES ('$username', '$no_telp', '$password')";
-
-if (mysqli_query($mysqli, $query_sql)){
-  echo "berhasil";
-} else {
-  echo "daftar gagal : " . mysqli_error($mysqli);
-}
-?>

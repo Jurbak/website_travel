@@ -1,24 +1,4 @@
-<?php
-     session_start();
-        include 'koneksi.php';
-        if (isset($_POST['submit'])) {
-            $user = $_POST ['username'];
-            $password = $_POST['password'];
-            $sql = "SELECT * FROM user WHERE username = '$user' AND password = '$password';";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
 
-            $cek = mysqli_num_rows($result);
-            if ($cek > 0) {
-                $_SESSION['username'] = $row['username'];
-                header('Location: index.php');
-            } else{
-                echo "<script>alert('Username atau password anda salah. Silahkan coba lagi!')</script>";
-            }
-
-        }
- 
-?>
 
 
 <!DOCTYPE html>
@@ -48,9 +28,13 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form  method="post" action="admin_page/index.php">
+      <form  method="post" action="val_log.php">
+        <?php if (isset($_GET['error'])) { ?>
+        <p class="error"><?php echo $_GET['error']; ?></p>
+      <?php } ?>        
+
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nama Pengguna" name="username">
+          <input type="text" class="form-control" placeholder="Nama Pengguna" name="username" id="username" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -58,7 +42,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -68,9 +52,9 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              
               <label for="remember">
-                Ingat Saya
+            
               </label>
             </div>
           </div>

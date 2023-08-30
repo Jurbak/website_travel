@@ -14,7 +14,7 @@
 
 
 
-    if ($mysqli->connect_error) {
+    if ($conn->connect_error) {
 
     die("Koneksi database gagal: " . $mysqli->connect_error);
 
