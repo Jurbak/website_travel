@@ -1,29 +1,22 @@
-<?php 
- 
-include 'koneksi.php';
- 
-#error_reporting(0);
- 
-session_start();
- 
-if (isset($_SESSION['username'])) {
-    header("Location: berhasil_login.php");
-}
- 
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
- 
-    $sql = "SELECT * FROM tbl_user WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
-    if ($result->num_rows > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['username'] = $row['username'];
-        header("Location: berhasil_login.php");
-    } else {
-        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
-    }
-}
+<?php
+     session_start();
+        include 'koneksi.php';
+        if (isset($_POST['submit'])) {
+            $user = $_POST ['username'];
+            $password = $_POST['password'];
+            $sql = "SELECT * FROM user WHERE username = '$user' AND password = '$password';";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+
+            $cek = mysqli_num_rows($result);
+            if ($cek > 0) {
+                $_SESSION['username'] = $row['username'];
+                header('Location: index.php');
+            } else{
+                echo "<script>alert('Username atau password anda salah. Silahkan coba lagi!')</script>";
+            }
+
+        }
  
 ?>
 
@@ -38,11 +31,11 @@ if (isset($_POST['submit'])) {
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="admin_page/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="admin_page/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="admin_page/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
   
@@ -50,12 +43,12 @@ if (isset($_POST['submit'])) {
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="index2.html" class="h1"><b>Travel</b></a>
+      <a href="#" class="h1"><b>Travel</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form  method="post" action="dashboard.php">
+      <form  method="post" action="admin_page/index.php">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Nama Pengguna" name="username">
           <div class="input-group-append">
@@ -93,7 +86,7 @@ if (isset($_POST['submit'])) {
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">Lupa Password</a>
+        <a href="cs_page/index.html">Lupa Password</a>
       </p>
       <p class="mb-0">
         <a href="register.php" class="text-center">Daftar</a>
@@ -106,11 +99,11 @@ if (isset($_POST['submit'])) {
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="admin_page/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin_page/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="admin_page/dist/js/adminlte.min.js"></script>
 </body>
 </html>
 
