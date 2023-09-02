@@ -284,8 +284,8 @@
                     <td>Win 95+</td>
                     <td> 4</td>
                     <td>X</td>
-                    <td><button class="btn btn-danger"  ><i class="fa fa-trash"></i></button>
-                        <button class="btn btn-primary"  ><i class="fa fa-pencil"></i></button>
+                    <td><button class="btn btn-danger"  ><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-primary"  ><i class="fas fa-pencil"></i></button>
                     </td>
                   </tr>
                   

@@ -1,8 +1,4 @@
-<?php 
-    include '../../../koneksi.php';
-    $data = mysqli_query($conn,"select * from tbl_travel");
-    while($d = mysqli_fetch_array($data)){
-?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -453,7 +449,18 @@
 
           </li>  
 
-          
+
+          <li class="nav-item">
+
+            <a href="../pesan/index.php" class="nav-link">
+
+              <i class="far nav-icon"></i>
+
+              <p>Data Karyawan </p>
+
+            </a>
+
+          </li>  
 
           
 
@@ -525,9 +532,10 @@
 
               <div class="card-header">
 
-                <h3 class="card-title">DataTable with default features</h3><br>
+                
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah" >Tambah Data</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambah" >Tambah 
+                </button>
 
 
               </div>
@@ -562,6 +570,12 @@
 
                   <tbody>
 
+                    <?php 
+                        include '../../../koneksi.php';
+                        $data = mysqli_query($conn,"select * from tbl_travel");
+                        while($d = mysqli_fetch_array($data)){
+                    ?>
+
                   <tr>
 
                     <td><?php echo $d['id_travel']; ?></td>
@@ -574,11 +588,16 @@
 
                     <td><?php echo $d['waktu_berangkat']; ?></td>
 
-                    <td><?php echo $d['gambar']; ?></td>
+                    <td><img src="../../dist/gambar/<?php echo $d['gambar']; ?>"></td>
 
-                    <td><button class="btn btn-danger"  ><i class="fa fa-trash"></i></button>
+                     
 
-                        <button class="btn btn-primary"  ><i class="fa fa-pencil"></i></button>
+                    <td>
+                        <a href="hapus.php?id=<?php echo $d['id_travel']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')" ><i class="fas fa-trash"></i ></a>
+
+                        <button class="btn btn-primary"  ><i class="fas fa-edit"></i></button>
+
+                        <button class="btn btn-primary"  ><i class="fas fa-eye"></i></button>
 
                     </td>
 
@@ -601,7 +620,7 @@
                         <button type="button" class="close" data-dismiss="modal"></button>
                           <h4 class="modal-title" >Tambah data travel</h4>
                       </div>
-                      <form method="post" enctype="multipart/form-data" class="form-user">
+                      <form method="post" enctype="multipart/form-data" class="form-user" action="tambah.php">
                         <div class="modal-body">
                           <div class="form-group">
                             <label for="">Tujuan travel</label>
@@ -618,7 +637,19 @@
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
                               <label for="">Pilih tanggal keberangkatan</label>
                               <i class="fas fa-calendar input-prefix"></i>
-                              <input placeholder="Pilih tanggal keberangkatan" type="datetime-local" id="" class="form-control" name="waktu_keberangkatan" required>
+                              <input placeholder="Pilih tanggal keberangkatan" type="datetime-local" id="" class="form-control" name="waktu_berangkat" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputFile">Gambar</label>
+                              <div class="input-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="" name="gambar">
+                                  <label class="custom-file-label" for="exampleInputFile" >Pilih gambar</label>
+                                </div>
+                                <div class="input-group-append">
+                                  <span class="input-group-text">Upload</span>
+                                </div>
+                              </div>
                             </div>
 
                             
@@ -630,14 +661,7 @@
                           </div>
                         </div>
                       </form>
-                      <?php
-                          if(isset($_POST['simpan'])){
-                            $tujuan = $_POST['tujuan'];
-                            $harga = $_POST['harga'];
-                            $deskripsi = $_POST['deskripsi'];
-                            $waktu_berangkat = $_POST['waktu_berangkat'];
-                          }
-                      ?>
+                      
                     </div>
                   </div>
                 </div>
@@ -782,21 +806,7 @@
 
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $(".simpan").click(function(){
-    var data = $('.form-user').serialize();
-    $.ajax({
-      type: 'POST',
-      url: "tambah.php",
-      data: data,
-      success: function() {
-        $('.tampildata').load("index.php");
-      }
-    });
-  });
-});
-</script>
+
 
 </body>
 

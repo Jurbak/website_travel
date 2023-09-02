@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+#$userlevel = $_SESSION['level']
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,7 +193,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['username'];?></a>
         </div>
       </div>
 
@@ -230,7 +236,15 @@
                   <p>Data Pesan </p>
                 </a>
             </li> 
-          </ul>       
+          </ul>  
+
+          <li class="nav-item">
+                <a href="admin/karyawan/index.php" class="nav-link ">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Data Karyawan</p>
+                </a>
+            </li>
+
           
           
       </nav>

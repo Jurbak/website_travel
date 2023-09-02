@@ -31,8 +31,19 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
               $_SESSION['username'] = $row['username'];
               $_SESSION['name'] = $row['name'];
               $_SESSION['id'] = $row['id'];
-              header("Location: admin_page/index.php");
-            exit();
+
+              if($row['level'] == "0"){
+                header("Location: admin_page/index.php");
+                exit();
+              }elseif($row['level'] == "1"){
+                header("Location: admin_page/index.php");
+                exit();
+              }elseif($row['level'] == "2"){
+                header("Location: ../index.html");
+                exit();
+              }
+
+
             }else{
         header("Location: index.php?error=Incorect User name or password");
             exit();

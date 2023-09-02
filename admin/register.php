@@ -46,7 +46,7 @@ require 'koneksi.php';
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="No Telepon" name="no_telp" required>
+          <input type="number" class="form-control" placeholder="No Telepon" name="no_telp" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -71,12 +71,7 @@ require 'koneksi.php';
         </div>
         <div class="row">
           <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               Saya menerima <a href="#">syarat dan ketentuan</a>
-              </label>
-            </div>
+            <a href="index.php" class="text-center">Sudah punya akun?</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -87,7 +82,7 @@ require 'koneksi.php';
       </form>
 
 
-      <a href="index.php" class="text-center">Sudah punya akun?</a>
+      
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
