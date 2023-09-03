@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -595,7 +596,7 @@
                     <td>
                         <a href="hapus.php?id=<?php echo $d['id_travel']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?')" ><i class="fas fa-trash"></i ></a>
 
-                        <button class="btn btn-primary"  ><i class="fas fa-edit"></i></button>
+                        <a href="" id="edit_travel" data-toggle="modal" data-target="#edit" data-id="<?php echo $d['id_travel']; ?>" data-tjn="<?php echo $d['tujuan']; ?>" data-hrg="<?php echo $d['harga']; ?>" data-desk="<?php echo $d['deskripsi']; ?>" data-wkt="<?php echo $d['waktu_berangkat']; ?>" data-gbr="<?php echo $d['gambar']; ?>"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
 
                         <button class="btn btn-primary"  ><i class="fas fa-eye"></i></button>
 
@@ -617,7 +618,7 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"></button>
+                        
                           <h4 class="modal-title" >Tambah data travel</h4>
                       </div>
                       <form method="post" enctype="multipart/form-data" class="form-user" action="tambah.php">
@@ -646,9 +647,7 @@
                                   <input type="file" class="custom-file-input" id="" name="gambar">
                                   <label class="custom-file-label" for="exampleInputFile" >Pilih gambar</label>
                                 </div>
-                                <div class="input-group-append">
-                                  <span class="input-group-text">Upload</span>
-                                </div>
+                                
                               </div>
                             </div>
 
@@ -660,13 +659,63 @@
                                 <input type="submit" class="btn btn-success" name="tambah" value="simpan" class="simpan" >
                           </div>
                         </div>
+                      </form> 
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="modal fade" role="dialog" id="edit">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        
+                          <h4 class="modal-title" >Edit data travel</h4>
+                      </div>
+                      <form  enctype="multipart/form-data" class="form-user"  id="form-edit">
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <label for="">Tujuan travel</label>
+                              <input type="text" class="form-control" id="" placeholder="Masukkan tujuan travel" name="tujuan" required>
+                               </div>
+                            <div class="form-group">
+                              <label for="">Harga</label>
+                              <input type="number" class="form-control" id="" placeholder="Masukkan Harga" name="harga" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="">Deskripsi</label>
+                              <input type="text" class="form-control" id="" placeholder="Masukkan deskripsi" name="deskripsi">
+                            </div>
+                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+                              <label for="">Pilih tanggal keberangkatan</label>
+                              <i class="fas fa-calendar input-prefix"></i>
+                              <input placeholder="Pilih tanggal keberangkatan" type="datetime-local" id="" class="form-control" name="waktu_berangkat" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputFile">Gambar</label>
+                              <div class="input-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="" name="gambar">
+                                  <label class="custom-file-label" for="exampleInputFile" >Pilih gambar</label>
+                                </div>
+                                
+                              </div>
+                            </div>
+
+                            
+                              
+                        </div>
+                        <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" name="edit" value="simpan" class="simpan" >
+                          </div>
+                        </div>
                       </form>
                       
                     </div>
                   </div>
                 </div>
-
-              </div>
+              
 
               <div class="tampildata"></div>
 
@@ -806,7 +855,19 @@
 
 </script>
 
-
+<script type="text/javascript">
+  $(document).on("click", "#edit_travel", function(){
+    var id_travel = $(this).data('id');
+    var tujuan = $(this).data('tjn');
+    var harga = $(this).data('hrg');
+    var deskripsi = $(this).data('desk');
+    var waktu = $(this).data('wkt');
+    var gambar = $(this).data('gbr');
+    $(".modal-body #tujuan").val(tjn);
+    $(".modal-body #harga").val(harga);
+    $(".modal-body #waktu_berangkat").val(waktu);
+  })
+</script>
 
 </body>
 
